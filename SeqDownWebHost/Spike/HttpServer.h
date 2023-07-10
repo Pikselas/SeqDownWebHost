@@ -44,7 +44,7 @@ private:
 					auto search_pos_start = buff.begin() + std::clamp((long) size_to_skip - (long) END_OF_SECTION.size() ,(long) 0 , (long)buff.size());
 					auto search_pos_end = buff.begin() + size_to_skip + *recv_stat;
 
-					if (auto fnd_pos = std::search(search_pos_start , search_pos_end , END_OF_SECTION.begin(), END_OF_SECTION.end()); fnd_pos != buff.end())
+					if (auto fnd_pos = std::search(search_pos_start , search_pos_end , END_OF_SECTION.begin(), END_OF_SECTION.end()); fnd_pos != search_pos_end)
 					{
 						HeadParser hp(buff.begin(), fnd_pos);
 
@@ -126,12 +126,12 @@ private:
 			}
 			catch (const NetworkException& e)
 			{
-				return;
+				std::cout << e.what();
 			}
 		}
 	};
 public:
-	HttpServer(const unsigned int port) : SERVER(std::to_string(port)) {}
+	HttpServer(const std::string& port) : SERVER(port) {}
 	void OnPath(const std::string& path , PATH_FUNCTION_T func)
 	{
 		PATH_FUNCTIONS[path] = func;
