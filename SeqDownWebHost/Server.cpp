@@ -2,14 +2,14 @@
 #include "Server.h"
 
 
-void OnRequestPath(const char* path, void(*callback)(void * reader))
+void OnRequestPath(const char* path, void * user_ptr ,void(*callback)(void* user_ptr,void * reader))
 {
-	server.OnPath(path, [&](Request& req, Response& res) {
+	server.OnPath(path, [=](Request& req, Response& res) {
 		
 		auto request_reader = std::make_unique<RequestReader>(req);
-		callback(request_reader.get());
+		callback(user_ptr , request_reader.get());
 		request_reader->WaitTillFinished();
-		res.SendString("Ooh!! Imouto janai desu?");
+		res.SendString("OK");
 	});
 }
 
