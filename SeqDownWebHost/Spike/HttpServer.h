@@ -1,8 +1,10 @@
 #pragma once
 #include<vector>
 #include<thread>
-#include<unordered_map>
 #include<array>
+#include<iostream>
+#include<unordered_map>
+
 #include"NetworkServer.h"
 #include"HeadParser.h"
 #include"Request.h"
@@ -126,7 +128,7 @@ private:
 			}
 			catch (const NetworkException& e)
 			{
-				std::cout << e.what();
+				std::cout << e.what() << std::endl;
 			}
 		}
 	};
