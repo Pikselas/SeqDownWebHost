@@ -18,6 +18,11 @@ int ReadRequestBody(void* request_reader, char* buffer, unsigned int size)
 	return reinterpret_cast<RequestReader*>(request_reader)->ReadBody(std::span<char>(buffer, size));
 }
 
+void CloseRequest(void* request_id)
+{
+	reinterpret_cast<RequestReader*>(request_id)->Close();
+}
+
 void StartServer()
 {
 	server.Serve();

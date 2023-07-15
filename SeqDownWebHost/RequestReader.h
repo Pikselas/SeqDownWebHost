@@ -13,6 +13,7 @@ public:
 	RequestReader(Request& request);
 public:
 	int ReadBody(std::span<char> buffer);
+	void Close();
 	void WaitTillFinished();
 };
 
